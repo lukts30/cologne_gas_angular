@@ -1,4 +1,10 @@
 <div class="p-4">
+
+    <mat-form-field>
+        <mat-label>Filter</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Search columns" #input>
+    </mat-form-field>
+
     <table mat-table [dataSource]="dataSource" matSort>
 
         <!-- ID Column -->
@@ -28,7 +34,10 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
-        <!-- https://material.angular.dev/components/table/overview#3-define-the-row-templates -->
+        <!-- 
+            https://material.angular.dev/components/table/overview#3-define-the-row-templates 
+            https://www.geeksforgeeks.org/angular-material-sort-header-component/
+        -->
 
     </table>
 
