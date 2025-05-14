@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { GasStationInventoryService } from '../../services/gas-station-inventory-service.service';
 import { GasStationDatapoint } from '../../interfaces/gas-station-datapoint';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-my-page',
-  imports: [],
+  imports: [ CommonModule ],
   templateUrl: './my-page.component.html',
   styleUrl: './my-page.component.css'
 })
