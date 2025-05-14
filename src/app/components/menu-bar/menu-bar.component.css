@@ -13,15 +13,3 @@
 .app-icon, span.user-displayname, span.appName {
     margin-right: 6px;
 }
-
-button.menu-button:hover {
-    background: rgba(0, 0, 0, 0.2);
-}
-
-button.menu-button.active {
-    background: rgba(255, 255, 255, 0.2);
-}
-
-button.menu-button.active:hover {
-    background: rgba(255, 255, 255, 0.1);
-}

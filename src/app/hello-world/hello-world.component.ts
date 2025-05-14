@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { HelloWorldService } from '../hello-world.service';
 import { CommonModule } from '@angular/common';
+import { GasStationDatapoint } from '../interfaces/gas-station-datapoint';
+import { GasStationInventoryService } from '../services/gas-station-inventory-service.service';
 
 @Component({
   selector: 'app-hello-world',
@@ -12,18 +13,12 @@ import { CommonModule } from '@angular/common';
 export class HelloWorldComponent {
   message: string = '';
   errorMessage: string = '';
+  gasStations: GasStationDatapoint[] = [];
 
-  constructor(private helloworldService: HelloWorldService) {}
+  constructor(private gasStationService: GasStationInventoryService) {}
 
   ngOnInit(): void {
-    this.helloworldService.getHelloWorldMessage().subscribe(
-      (response) => {
-        this.message = JSON.stringify(response, null, 4);
-      },
-      (error) => {
-        this.errorMessage = 'Faild to load message';
-        console.error('API Error:', error);
-      }
-    );
+    this.gasStationService.getGasStationData()
+      .subscribe(response => this.message = JSON.stringify(response, null, 4));
   }
 }
