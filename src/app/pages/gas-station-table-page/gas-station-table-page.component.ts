@@ -5,11 +5,22 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatInputModule } from '@angular/material/input';
+import { MatCheckboxChange, MatCheckboxModule } from '@angular/material/checkbox';
+import { HighlightDirective } from './highlight.directive';
+import { FormsModule } from '@angular/forms';
 
 
 @Component({
   selector: 'app-gas-station-table-page',
-  imports: [MatTableModule, MatPaginatorModule, MatSortModule, MatInputModule],
+  imports: [
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatInputModule,
+    MatCheckboxModule,
+    HighlightDirective,
+    FormsModule,
+  ],
   templateUrl: './gas-station-table-page.component.html',
   styleUrl: './gas-station-table-page.component.css'
 })
@@ -17,6 +28,9 @@ export class GasStationTablePageComponent implements OnInit, AfterViewInit {
 
   displayedColumns = ['objectid', 'adresse', 'latitude', 'longitude'];
   dataSource = new MatTableDataSource<GasStationDatapoint>([]);
+  hideUnmatchedRecords = true;
+
+  searchText = '';
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -38,9 +52,23 @@ export class GasStationTablePageComponent implements OnInit, AfterViewInit {
     this.dataSource.sort = this.sort;
   }
 
+  showOptions(event: MatCheckboxChange): void {
+    console.log(event.checked);
+
+    if(!this.hideUnmatchedRecords) {
+      this.dataSource.filter = "";
+      return;
+    }
+  }
+
   // https://www.angularjswiki.com/material/mat-table-filter/
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+  applyFilter(event?: Event) {
+    if(!this.hideUnmatchedRecords) {
+      this.dataSource.filter = "";
+      return;
+    }
+    this.dataSource.filter = this.searchText.trim().toLowerCase();
+    // const filterValue = (event.target as HTMLInputElement).value;
+    // this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 }

@@ -1,0 +1,3 @@
+:host ::ng-deep .font-weight-bold {
+    font-weight: 600 !important;
+}

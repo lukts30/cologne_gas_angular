@@ -1,8 +1,13 @@
 <div class="p-4">
 
+    <section class="example-section">
+        <mat-checkbox [(ngModel)]="hideUnmatchedRecords" (change)="applyFilter(undefined)">Show only matches</mat-checkbox>
+    </section>
+
     <mat-form-field>
         <mat-label>Filter</mat-label>
-        <input matInput (keyup)="applyFilter($event)" placeholder="Search columns" #input>
+        <input matInput (keyup)="applyFilter($event)" [(ngModel)]="searchText" placeholder="Enter text to search"
+            #input>
     </mat-form-field>
 
     <table mat-table [dataSource]="dataSource" matSort>
@@ -16,7 +21,12 @@
         <!-- Adresse Column -->
         <ng-container matColumnDef="adresse">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Adresse</th>
-            <td mat-cell *matCellDef="let element">{{element.adresse}}</td>
+            <td mat-cell *matCellDef="let element" 
+                appHighlight 
+                [searchedWord]="searchText"
+                [classToApply]="'font-weight-bold'"
+                content="{{element.adresse}}">
+            </td>
         </ng-container>
 
         <!-- Latitude Column -->
