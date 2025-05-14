@@ -33,6 +33,7 @@ export class MenuBarComponent implements OnInit {
         {title: 'Welcome', routerLink: ''}, 
         {title: 'JSON RAW', routerLink: 'raw-json'}, 
         {title: 'List', routerLink: 'gas-stations'}, 
+        {title: 'Table', routerLink: 'gas-table'}, 
     ];
 
     constructor() { }

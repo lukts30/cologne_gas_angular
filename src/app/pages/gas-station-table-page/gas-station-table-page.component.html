@@ -1,0 +1,38 @@
+<div class="p-4">
+    <table mat-table [dataSource]="dataSource" matSort>
+
+        <!-- ID Column -->
+        <ng-container matColumnDef="objectid">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+            <td mat-cell *matCellDef="let element">{{element.objectid}}</td>
+        </ng-container>
+
+        <!-- Adresse Column -->
+        <ng-container matColumnDef="adresse">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Adresse</th>
+            <td mat-cell *matCellDef="let element">{{element.adresse}}</td>
+        </ng-container>
+
+        <!-- Latitude Column -->
+        <ng-container matColumnDef="latitude">
+            <th mat-header-cell *matHeaderCellDef>Latitude</th>
+            <td mat-cell *matCellDef="let element">{{element.latitude}}</td>
+        </ng-container>
+
+        <!-- Longitude Column -->
+        <ng-container matColumnDef="longitude">
+            <th mat-header-cell *matHeaderCellDef>Longitude</th>
+            <td mat-cell *matCellDef="let element">{{element.longitude}}</td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+        <!-- https://material.angular.dev/components/table/overview#3-define-the-row-templates -->
+
+    </table>
+
+    <mat-paginator [pageSize]="25" [pageSizeOptions]="[10, 25, 50, 100]" showFirstLastButtons
+        aria-label="Select page"></mat-paginator>
+
+</div>
