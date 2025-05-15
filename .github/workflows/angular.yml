@@ -1,3 +1,5 @@
+# https://medium.com/@kinneko-de/angular-typescript-and-cd-to-github-pages-2024-bc71d3a6eeff
+# https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site#publishing-with-a-custom-github-actions-workflow
 name: Build
 
 on:
@@ -10,16 +12,12 @@ on:
       - main
 
 jobs:
-  build_and_deploy_job:
+  build:
     if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
     runs-on: ubuntu-latest
-    name: Build and Deploy Job
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
-        with:
-          submodules: true
-          lfs: false
+        uses: actions/checkout@v4
       - name: Node 22 
         uses: actions/setup-node@v4
         with:
@@ -27,4 +25,27 @@ jobs:
       - name: NPM Install
         run: npm install
       - name: Ng Build
-        run: npm run build 
+        run: npm run build -- --base-href /${{ github.event.repository.name }}/
+      - run: |
+         pwd
+         ls -lah
+         ls -lah ./dist/frontend/browser/
+         cp ./dist/frontend/browser/index.html ./dist/frontend/browser/404.html
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: 'dist/frontend/browser/.'
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: 'https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/'
+    steps:
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+      - name: Deploy
+        uses: actions/deploy-pages@v4
