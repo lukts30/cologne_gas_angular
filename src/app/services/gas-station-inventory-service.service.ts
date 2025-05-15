@@ -61,4 +61,10 @@ export class GasStationInventoryService {
         })))
       );
   }
+
+  getGasStationById(id: number): Observable<GasStationDatapoint | undefined> {
+    return this.getGasStationData().pipe(
+      map(stations => stations.find(station => station.objectid === id))
+    );
+  }
 }

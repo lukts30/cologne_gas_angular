@@ -1,4 +1,12 @@
-<div>
-    <h2 class="text-xl font-semibold">Gas Station Details Page</h2>
-    <p>Selected Station ID: <strong>{{ stationId }}</strong></p>
+<div *ngIf="station$ | async as station; else loading">
+    <h2 class="text-xl font-semibold">Gas Station Details</h2>
+    <p><strong>ID:</strong> {{ station.objectid }}</p>
+    <p><strong>Adresse:</strong> {{ station.adresse }}</p>
+    <p><strong>Latitude:</strong> {{ station.latitude }}</p>
+    <p><strong>Longitude:</strong> {{ station.longitude }}</p>
+    <!-- TODO: add detailed map -->
 </div>
+
+<ng-template #loading>
+    <p>Loading station details...</p>
+</ng-template>
