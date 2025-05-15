@@ -1,4 +1,4 @@
-<div *ngIf="station$ | async as station; else loading">
+<div *ngIf="station; else loading">
     <h2 class="text-xl font-semibold">Gas Station Details</h2>
     <p><strong>ID:</strong> {{ station.objectid }}</p>
     <p><strong>Adresse:</strong> {{ station.adresse }}</p>
