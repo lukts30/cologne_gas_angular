@@ -8,6 +8,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxChange, MatCheckboxModule } from '@angular/material/checkbox';
 import { HighlightDirective } from './highlight.directive';
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { MatButtonModule } from '@angular/material/button';
 
 
 @Component({
@@ -17,16 +19,18 @@ import { FormsModule } from '@angular/forms';
     MatPaginatorModule,
     MatSortModule,
     MatInputModule,
+    MatButtonModule,
     MatCheckboxModule,
     HighlightDirective,
     FormsModule,
+    RouterModule
   ],
   templateUrl: './gas-station-table-page.component.html',
   styleUrl: './gas-station-table-page.component.css'
 })
 export class GasStationTablePageComponent implements OnInit, AfterViewInit {
 
-  displayedColumns = ['objectid', 'adresse', 'latitude', 'longitude'];
+  displayedColumns = ['objectid', 'adresse', 'latitude', 'longitude', 'action'];
   dataSource = new MatTableDataSource<GasStationDatapoint>([]);
   hideUnmatchedRecords = true;
 

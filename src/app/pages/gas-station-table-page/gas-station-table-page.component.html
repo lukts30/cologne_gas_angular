@@ -41,6 +41,17 @@
             <td mat-cell *matCellDef="let element">{{element.longitude}}</td>
         </ng-container>
 
+        <!-- Btn Column -->
+        <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef>Action</th>
+            <td mat-cell *matCellDef="let element">
+                <button mat-flat-button	
+                        [routerLink]="['/gas-stations', element.objectid]">
+                  Show on Map
+                </button>
+            </td>
+        </ng-container>
+
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
