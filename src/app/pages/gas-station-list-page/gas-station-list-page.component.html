@@ -1,3 +1,11 @@
-<div *ngFor="let station of gasStations">
-    <p>{{ station.adresse }} ({{ station.latitude }}, {{ station.longitude }})</p>
-</div>
+<mat-list *ngIf="gasStations; else loading">
+    <mat-list-item *ngFor="let station of gasStations">
+        <span matListItemTitle>{{ station.adresse }}</span>
+        <span matListItemLine>{{ station.latitude }}, {{ station.longitude }}</span>
+    </mat-list-item>
+</mat-list>
+
+<ng-template #loading>
+    <p>Loading station details...</p>
+    <mat-spinner></mat-spinner>
+</ng-template>
