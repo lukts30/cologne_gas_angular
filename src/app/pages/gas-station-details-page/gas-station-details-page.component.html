@@ -4,9 +4,16 @@
     <p><strong>Adresse:</strong> {{ station.adresse }}</p>
     <p><strong>Latitude:</strong> {{ station.latitude }}</p>
     <p><strong>Longitude:</strong> {{ station.longitude }}</p>
-    <!-- TODO: add detailed map -->
+
+    <!-- map -->
+    <div class="map-container">
+        <google-map [center]="center" [zoom]="zoom" height="500px" width="95%">
+            <map-marker [position]="{ lat: station.latitude, lng: station.longitude }"></map-marker>
+        </google-map>
+    </div>
 </div>
 
 <ng-template #loading>
     <p>Loading station details...</p>
+    <mat-spinner></mat-spinner>
 </ng-template>
