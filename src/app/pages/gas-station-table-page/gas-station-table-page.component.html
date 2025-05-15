@@ -1,12 +1,12 @@
 <div class="p-4">
 
     <section class="example-section">
-        <mat-checkbox [(ngModel)]="hideUnmatchedRecords" (change)="applyFilter(undefined)">Show only matches</mat-checkbox>
+        <mat-checkbox [(ngModel)]="hideUnmatchedRecords" (change)="searchTextChanged()">Show only matches</mat-checkbox>
     </section>
 
     <mat-form-field>
         <mat-label>Filter</mat-label>
-        <input matInput (keyup)="applyFilter($event)" [(ngModel)]="searchText" placeholder="Enter text to search"
+        <input matInput (keyup)="searchTextChanged()" (change)="searchTextChanged()" [(ngModel)]="searchText" placeholder="Enter text to search"
             #input>
     </mat-form-field>
 

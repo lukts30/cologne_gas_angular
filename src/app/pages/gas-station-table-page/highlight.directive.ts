@@ -28,7 +28,7 @@ export class HighlightDirective implements OnChanges {
   }
 
   getFormattedText() {
-    const re = new RegExp(`(${this.searchedWord})`, 'gi');
+    const re = new RegExp(`(${this.searchedWord.trim()})`, 'gi');
     return this.content.replace(re, `<span class="${this.classToApply}">$1</span>`);
   }
 }

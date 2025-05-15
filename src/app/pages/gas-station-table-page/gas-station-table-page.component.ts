@@ -65,14 +65,12 @@ export class GasStationTablePageComponent implements OnInit, AfterViewInit {
     }
   }
 
-  // https://www.angularjswiki.com/material/mat-table-filter/
-  applyFilter(event?: Event) {
+  searchTextChanged() {
     if(!this.hideUnmatchedRecords) {
       this.dataSource.filter = "";
       return;
     }
     this.dataSource.filter = this.searchText.trim().toLowerCase();
-    // const filterValue = (event.target as HTMLInputElement).value;
-    // this.dataSource.filter = filterValue.trim().toLowerCase();
   }
+
 }
