@@ -4,12 +4,12 @@ import { GasStationDatapoint } from '../../interfaces/gas-station-datapoint';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-my-page',
+  selector: 'app-gas-station-list-page',
   imports: [ CommonModule ],
-  templateUrl: './my-page.component.html',
-  styleUrl: './my-page.component.css'
+  templateUrl: './gas-station-list-page.component.html',
+  styleUrl: './gas-station-list-page.component.css'
 })
-export class MyPageComponent {
+export class GasStationListPageComponent {
   gasStations: GasStationDatapoint[] = [];
 
   constructor(private gasStationService: GasStationInventoryService) {}

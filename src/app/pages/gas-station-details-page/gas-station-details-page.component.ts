@@ -22,6 +22,7 @@ export class GasStationDetailsPageComponent implements OnInit {
 
   station?: GasStationDatapoint;
 
+  // Cologne center
   center: google.maps.LatLngLiteral = { lat: 50.935173, lng: 6.953101 };
   zoom = 11;
 

@@ -4,7 +4,7 @@ import { GasStationDatapoint } from '../../interfaces/gas-station-datapoint';
 import { GasStationInventoryService } from '../../services/gas-station-inventory-service.service';
 
 @Component({
-  selector: 'app-hello-world',
+  selector: 'gas-station-json-page',
   standalone: true,
   imports: [CommonModule],
   templateUrl: './gas-station-json-page.component.html',
