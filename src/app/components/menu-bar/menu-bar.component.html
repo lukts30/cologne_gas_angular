@@ -1,8 +1,7 @@
 <mat-toolbar>
-  <mat-icon class="app-icon">token</mat-icon>
+  <mat-icon class="app-icon">local_gas_station</mat-icon>
+  <span class="appName">Cologne Gas Stations</span>
   <button class="menu-button" mat-button color="primary" routerLinkActive="active"
     [routerLinkActiveOptions]="{exact: true}" [routerLink]="button.routerLink"
     *ngFor="let button of buttons">{{button.title}}</button>
-
-  <span class="appName">Integration Architectures</span>
 </mat-toolbar>

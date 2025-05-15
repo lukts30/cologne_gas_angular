@@ -30,8 +30,7 @@ export class MenuBarComponent implements OnInit {
     This array holds the definition of the menu's buttons.
    */
     buttons = [
-        {title: 'Welcome', routerLink: ''}, 
-        {title: 'JSON RAW', routerLink: 'raw-json'}, 
+        {title: 'JSON RAW', routerLink: 'gas-station-json'}, 
         {title: 'List', routerLink: 'gas-stations'}, 
         {title: 'Table', routerLink: 'gas-table'}, 
     ];
