@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { GasStationInventoryService } from '../../services/gas-station-inventory-service.service';
 import { GasStationDatapoint } from '../../interfaces/gas-station-datapoint';
 import { CommonModule } from '@angular/common';
@@ -15,7 +15,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
   templateUrl: './gas-station-list-page.component.html',
   styleUrl: './gas-station-list-page.component.css'
 })
-export class GasStationListPageComponent {
+export class GasStationListPageComponent implements OnInit {
   gasStations: GasStationDatapoint[] = [];
 
   constructor(private gasStationService: GasStationInventoryService) {}

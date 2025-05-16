@@ -6,19 +6,19 @@ import { GasStationDatapoint } from '../interfaces/gas-station-datapoint';
 
 interface GasStationResponse {
   displayFieldName: string;
-  fieldAliases: { [key: string]: string };
+  fieldAliases: Record<string, string>;
   geometryType: string;
   spatialReference: {
     wkid: number;
     latestWkid: number;
   };
-  fields: Array<{
+  fields: {
     name: string;
     type: string;
     alias: string;
     length?: number;
-  }>;
-  features: Array<{
+  }[];
+  features: {
     attributes: {
       objectid: number;
       adresse: string;
@@ -27,7 +27,7 @@ interface GasStationResponse {
       x: number;
       y: number;
     };
-  }>;
+  }[];
 }
 
 @Injectable({

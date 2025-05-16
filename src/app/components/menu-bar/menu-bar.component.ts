@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
@@ -24,7 +24,7 @@ import { CommonModule } from '@angular/common';
     templateUrl: './menu-bar.component.html',
     styleUrls: ['./menu-bar.component.css']
 })
-export class MenuBarComponent implements OnInit {
+export class MenuBarComponent {
 
     /*
     This array holds the definition of the menu's buttons.
@@ -34,10 +34,4 @@ export class MenuBarComponent implements OnInit {
         {title: 'List', routerLink: 'gas-station-list'}, 
         {title: 'Table', routerLink: 'gas-table'}, 
     ];
-
-    constructor() { }
-
-    ngOnInit(): void {
-        // this.fetchUser();
-    }
 }

@@ -10,6 +10,7 @@ export class HighlightDirective implements OnChanges {
 
   constructor(private el: ElementRef, private renderer: Renderer2) { }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   ngOnChanges(changes: SimpleChanges): void {
     if (!this.content) {
       return;
