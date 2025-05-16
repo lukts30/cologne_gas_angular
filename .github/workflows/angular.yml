@@ -27,6 +27,8 @@ jobs:
       - name: Run Tests
         # https://dev.to/soumayaerradi/testing-in-angular-1c6l
         run: npx ng test --no-watch --no-progress --browsers=ChromeHeadless
+      - name: Lint 
+        run: npm run lint
       - name: Ng Build
         run: npm run build -- --base-href /${{ github.event.repository.name }}/
       - run: |
