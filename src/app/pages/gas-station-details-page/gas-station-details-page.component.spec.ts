@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { GasStationDetailsPageComponent } from './gas-station-details-page.component';
+import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 
 describe('GasStationDetailsPageComponent', () => {
   let component: GasStationDetailsPageComponent;
@@ -8,7 +10,11 @@ describe('GasStationDetailsPageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [GasStationDetailsPageComponent]
+      imports: [GasStationDetailsPageComponent],
+      providers: [        
+        provideHttpClient(),
+        provideHttpClientTesting(),
+      ]
     })
     .compileComponents();
 

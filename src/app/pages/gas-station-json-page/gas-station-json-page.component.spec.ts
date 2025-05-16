@@ -1,14 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { GasStationJSONPageComponent } from './gas-station-json-page.component';
+import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 
-describe('HelloWorldComponent', () => {
+describe('GasStationJSONPageComponent', () => {
   let component: GasStationJSONPageComponent;
   let fixture: ComponentFixture<GasStationJSONPageComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [GasStationJSONPageComponent]
+      imports: [GasStationJSONPageComponent],
+      providers: [        
+        provideHttpClient(),
+        provideHttpClientTesting(),
+      ]
     })
     .compileComponents();
 

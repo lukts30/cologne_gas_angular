@@ -24,6 +24,9 @@ jobs:
           node-version: 22.x
       - name: NPM Install
         run: npm install
+      - name: Run Tests
+        # https://dev.to/soumayaerradi/testing-in-angular-1c6l
+        run: npx ng test --no-watch --no-progress --browsers=ChromeHeadless
       - name: Ng Build
         run: npm run build -- --base-href /${{ github.event.repository.name }}/
       - run: |
