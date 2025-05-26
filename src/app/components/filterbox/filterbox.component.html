@@ -29,7 +29,7 @@
         <div class="filterbox-row view-toggle-row" *ngIf="this.showViewToggleRow()">
             <div class="spacer"></div>
             <div class="view-toggle">
-                <label class="view-label">View:</label>
+                <label class="view-label" for="view-list">View:</label>
 
                 <input type="checkbox" id="view-list" name="viewMode" class="view-input"
                     [checked]="filterboxState.viewMode === 'list'" (change)="setViewMode('list')" />

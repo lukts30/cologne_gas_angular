@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, input, output } from '@angular/core';
+import { Component, input, OnInit, output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -32,7 +32,7 @@ export interface FilterBoxState {
   templateUrl: './filterbox.component.html',
   styleUrl: './filterbox.component.css'
 })
-export class FilterboxComponent {
+export class FilterboxComponent implements OnInit {
 
   showViewToggleRow = input<boolean>(false)
   showOnlyMatchesPreset = input<boolean>(false)
