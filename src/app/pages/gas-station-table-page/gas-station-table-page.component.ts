@@ -62,7 +62,11 @@ export class GasStationTablePageComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
-    this.applyFilterAndSort();
+
+    // hack to avoid ExpressionChangedAfterItHasBeenCheckedError in tests
+    setTimeout(() => {
+      this.applyFilterAndSort();
+    });
   }
 
   onFilterChanged(state: FilterBoxState) {

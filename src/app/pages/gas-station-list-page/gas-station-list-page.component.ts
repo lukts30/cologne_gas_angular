@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { GasStationInventoryService } from '../../services/gas-station-inventory-service.service';
 import { GasStationDatapoint } from '../../interfaces/gas-station-datapoint';
 import { CommonModule } from '@angular/common';
@@ -19,7 +19,7 @@ import { FilterboxComponent, FilterBoxState } from "../../components/filterbox/f
   templateUrl: './gas-station-list-page.component.html',
   styleUrl: './gas-station-list-page.component.css'
 })
-export class GasStationListPageComponent implements OnInit {
+export class GasStationListPageComponent implements OnInit, AfterViewInit {
 
   gasStations: GasStationDatapoint[] = [];
   filteredGasStations: GasStationDatapoint[] = [];
@@ -40,6 +40,7 @@ export class GasStationListPageComponent implements OnInit {
     });
   }
 
+  // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method
   ngAfterViewInit(): void {
     // this.applyFilterAndSort();
   }

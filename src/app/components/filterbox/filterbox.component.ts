@@ -65,11 +65,11 @@ export class FilterboxComponent implements OnInit {
           newState.sortDirection = params['sort'] === 'desc' ? 'desc' : 'asc';
         }
     
-        if (params.hasOwnProperty('search')) {
+        if (params['search']) {
           newState.searchQuery = params['search'];
         }
     
-        if (params.hasOwnProperty('show')) {
+        if (params['show']) {
           newState.showOnlyMatches = params['show'] === 'true';
         }
     
