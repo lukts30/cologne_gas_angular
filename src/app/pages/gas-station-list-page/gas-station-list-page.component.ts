@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { MatListModule } from '@angular/material/list';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { GasStationListItemComponent } from "../../components/gas-station-list-item/gas-station-list-item.component";
+import { FilterboxComponent } from "../../components/filterbox/filterbox.component";
 
 @Component({
   selector: 'app-gas-station-list-page',
@@ -12,7 +13,8 @@ import { GasStationListItemComponent } from "../../components/gas-station-list-i
     CommonModule,
     MatListModule,
     MatProgressSpinnerModule,
-    GasStationListItemComponent
+    GasStationListItemComponent,
+    FilterboxComponent
 ],
   templateUrl: './gas-station-list-page.component.html',
   styleUrl: './gas-station-list-page.component.css'
