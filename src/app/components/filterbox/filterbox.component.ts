@@ -35,6 +35,7 @@ export interface FilterBoxState {
 export class FilterboxComponent {
 
   showViewToggleRow = input<boolean>(false)
+  showOnlyMatchesPreset = input<boolean>(false)
 
   filterboxState: FilterBoxState = {
     searchQuery: '',
@@ -42,8 +43,13 @@ export class FilterboxComponent {
     sortDirection: 'asc',
     viewMode: 'list'
   };
+
   filterboxStateChanged = output<FilterBoxState>();
 
+  ngOnInit() {
+    this.filterboxState.showOnlyMatches = this.showOnlyMatchesPreset();
+  }
+  
   emitChanges() {
     this.filterboxStateChanged.emit(this.filterboxState);
   }
