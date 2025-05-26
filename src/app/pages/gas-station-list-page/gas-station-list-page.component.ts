@@ -4,14 +4,16 @@ import { GasStationDatapoint } from '../../interfaces/gas-station-datapoint';
 import { CommonModule } from '@angular/common';
 import { MatListModule } from '@angular/material/list';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { GasStationListItemComponent } from "../../components/gas-station-list-item/gas-station-list-item.component";
 
 @Component({
   selector: 'app-gas-station-list-page',
-  imports: [ 
-    CommonModule, 
+  imports: [
+    CommonModule,
     MatListModule,
-    MatProgressSpinnerModule
-  ],
+    MatProgressSpinnerModule,
+    GasStationListItemComponent
+],
   templateUrl: './gas-station-list-page.component.html',
   styleUrl: './gas-station-list-page.component.css'
 })
