@@ -8,6 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSortModule } from '@angular/material/sort';
+import { ActivatedRoute, Router } from '@angular/router';
 
 export interface FilterBoxState {
   searchQuery: string;
@@ -34,8 +35,9 @@ export interface FilterBoxState {
 })
 export class FilterboxComponent implements OnInit {
 
-  showViewToggleRow = input<boolean>(false)
-  showOnlyMatchesPreset = input<boolean>(false)
+  showViewToggleRow = input<boolean>(false);
+  showOnlyMatchesPreset = input<boolean>(false);
+  useQueryParams = input<boolean>(true);
 
   filterboxState: FilterBoxState = {
     searchQuery: '',
@@ -46,12 +48,53 @@ export class FilterboxComponent implements OnInit {
 
   filterboxStateChanged = output<FilterBoxState>();
 
+  constructor(private router: Router, private route: ActivatedRoute) {}
+
   ngOnInit() {
     this.filterboxState.showOnlyMatches = this.showOnlyMatchesPreset();
+
+    if (this.useQueryParams()) {
+      this.route.queryParams.subscribe(params => {
+        const newState: Partial<FilterBoxState> = { ...this.filterboxState };
+    
+        if (params['view']) {
+          newState.viewMode = params['view'] === 'gallery' ? 'gallery' : 'list';
+        }
+    
+        if (params['sort']) {
+          newState.sortDirection = params['sort'] === 'desc' ? 'desc' : 'asc';
+        }
+    
+        if (params.hasOwnProperty('search')) {
+          newState.searchQuery = params['search'];
+        }
+    
+        if (params.hasOwnProperty('show')) {
+          newState.showOnlyMatches = params['show'] === 'true';
+        }
+    
+        this.filterboxState = newState as FilterBoxState;
+      });
+    }    
+    this.emitChanges();
   }
   
   emitChanges() {
     this.filterboxStateChanged.emit(this.filterboxState);
+
+    if (this.useQueryParams()) {
+      this.router.navigate([], {
+        relativeTo: this.route,
+        queryParams: {
+          view: this.filterboxState.viewMode,
+          sort: this.filterboxState.sortDirection,
+          search: this.filterboxState.searchQuery || null,
+          show: this.filterboxState.showOnlyMatches || null,
+        },
+        queryParamsHandling: 'merge',
+      });
+    }
+
   }
 
   onSearchInput(event: Event) {

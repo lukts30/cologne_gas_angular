@@ -34,9 +34,13 @@ export class GasStationTablePageComponent implements OnInit, AfterViewInit {
 
   displayedColumns = ['objectid', 'adresse', 'latitude', 'longitude', 'action'];
   dataSource = new MatTableDataSource<GasStationDatapoint>([]);
-  hideUnmatchedRecords = true;
 
-  currentFilter?: FilterBoxState;
+  filterState: FilterBoxState = {
+    searchQuery: '',
+    showOnlyMatches: false,
+    sortDirection: 'asc',
+    viewMode: 'list'
+  };
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -51,33 +55,32 @@ export class GasStationTablePageComponent implements OnInit, AfterViewInit {
 
     this.gasStationService.getGasStationData().subscribe(data => {
       this.dataSource.data = data;
-      this.sort.active = 'adresse';
-      this.sort.direction = 'asc';
-      this.sort.sortChange.emit({ active: 'adresse', direction: 'asc' });
+      this.applyFilterAndSort();
     });
   }
 
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+    this.applyFilterAndSort();
   }
 
-  searchTextChanged2(event: FilterBoxState) {
-    this.currentFilter = event;
+  onFilterChanged(state: FilterBoxState) {
+    this.filterState = state;
+    this.applyFilterAndSort();
+  }
 
-    //this.searchText = event.searchQuery;
-    this.hideUnmatchedRecords = event.showOnlyMatches;
-  
-    if (!this.hideUnmatchedRecords) {
+  applyFilterAndSort() {
+    if (!this.filterState.showOnlyMatches) {
       this.dataSource.filter = "";
     } else {
-      this.dataSource.filter = this.currentFilter.searchQuery.trim().toLowerCase();
+      this.dataSource.filter = this.filterState.searchQuery.trim().toLowerCase();
     }
   
     if (this.sort) {
       this.sort.active = 'adresse';
-      this.sort.direction = event.sortDirection;
-      this.sort.sortChange.emit({ active: this.sort.active, direction: event.sortDirection });
+      this.sort.direction = this.filterState.sortDirection;
+      this.sort.sortChange.emit({ active: this.sort.active, direction: this.sort.direction });
     }
   }
 }

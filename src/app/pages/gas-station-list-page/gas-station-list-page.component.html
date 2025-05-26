@@ -1,17 +1,19 @@
-<app-filterbox
-  [showViewToggleRow]="true"
-  [showOnlyMatchesPreset]="true"
+<app-filterbox [showViewToggleRow]="true" [showOnlyMatchesPreset]="true"
   (filterboxStateChanged)="onFilterChanged($event)">
 </app-filterbox>
 
 <mat-nav-list *ngIf="filteredGasStations; else loading">
+
+  <div class="station-grid" [class.gallery-view]="filterState.viewMode === 'gallery'">
     <app-gas-station-list-item
       *ngFor="let station of filteredGasStations"
       [station]="station">
     </app-gas-station-list-item>
-  </mat-nav-list>
+  </div>
+
+</mat-nav-list>
 
 <ng-template #loading>
-    <p>Loading station details...</p>
-    <mat-spinner></mat-spinner>
+  <p>Loading station details...</p>
+  <mat-spinner></mat-spinner>
 </ng-template>

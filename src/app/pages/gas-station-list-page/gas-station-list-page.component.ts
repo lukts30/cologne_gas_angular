@@ -40,6 +40,10 @@ export class GasStationListPageComponent implements OnInit {
     });
   }
 
+  ngAfterViewInit(): void {
+    // this.applyFilterAndSort();
+  }
+
   onFilterChanged(state: FilterBoxState) {
     this.filterState = state;
     this.applyFilterAndSort();

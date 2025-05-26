@@ -1,4 +1,4 @@
-<app-filterbox (filterboxStateChanged)="searchTextChanged2($event)" [showViewToggleRow]="false">
+<app-filterbox (filterboxStateChanged)="onFilterChanged($event)" [showViewToggleRow]="false">
 </app-filterbox>
 
 <div>
@@ -15,7 +15,7 @@
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Adresse</th>
             <td mat-cell *matCellDef="let element" 
                 appHighlight 
-                [searchedWord]="currentFilter?.searchQuery || ''"
+                [searchedWord]="filterState.searchQuery || ''"
                 [classToApply]="'font-weight-bold'"
                 content="{{element.adresse}}">
             </td>
