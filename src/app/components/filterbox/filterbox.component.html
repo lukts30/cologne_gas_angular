@@ -5,8 +5,8 @@
             <!-- Search -->
             <mat-form-field appearance="fill" class="search-field">
                 <mat-label>Search</mat-label>
-                <input matInput [(ngModel)]="filterboxState.searchQuery" (input)="emitChanges()" placeholder="Search..."
-                    name="search" />
+                <input matInput [ngModel]="filterboxState.searchQuery" (input)="onSearchInput($event)"
+                    placeholder="Search..." name="search" />
             </mat-form-field>
 
             <!-- Checkbox -->
@@ -27,7 +27,7 @@
         </div>
 
         <!-- Row 2: Custom icon checkboxes -->
-        <div class="filterbox-row view-toggle-row">
+        <div class="filterbox-row view-toggle-row" *ngIf="this.showViewToggleRow()">
             <div class="spacer"></div>
             <div class="view-toggle">
                 <label class="view-label">View:</label>

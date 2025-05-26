@@ -1,4 +1,4 @@
-<app-filterbox></app-filterbox>
+<app-filterbox [showViewToggleRow]="true"></app-filterbox>
 <mat-nav-list *ngIf="gasStations; else loading">
     <app-gas-station-list-item *ngFor="let station of gasStations" [station]="station"/>
 </mat-nav-list>
