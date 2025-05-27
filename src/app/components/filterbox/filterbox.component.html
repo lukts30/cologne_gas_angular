@@ -1,0 +1,49 @@
+<div class="filterbox-wrapper">
+    <form class="filterbox-container" (ngSubmit)="emitChanges()">
+        <!-- Row 1 -->
+        <div class="filterbox-row">
+            <!-- Search -->
+            <mat-form-field appearance="fill" class="search-field">
+                <mat-label>Search</mat-label>
+                <input matInput [ngModel]="filterboxState.searchQuery" (input)="onSearchInput($event)"
+                    placeholder="Search..." name="search" />
+            </mat-form-field>
+
+            <mat-checkbox class="match-checkbox" [(ngModel)]="filterboxState.showOnlyMatches" (change)="emitChanges()"
+                labelPosition="before" name="showOnlyMatches">
+                Show only matches
+            </mat-checkbox>
+
+            <!-- Sort -->
+            <mat-form-field appearance="fill" class="sort-select">
+                <mat-label>Sort</mat-label>
+                <mat-select [(ngModel)]="filterboxState.sortDirection" (selectionChange)="emitChanges()"
+                    name="sortDirection">
+                    <mat-option value="asc">Ascending</mat-option>
+                    <mat-option value="desc">Descending</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <!-- Row 2: Custom icon checkboxes -->
+        <div class="filterbox-row view-toggle-row" *ngIf="this.showViewToggleRow()">
+            <div class="spacer"></div>
+            <div class="view-toggle">
+                <label class="view-label" for="view-list">View:</label>
+
+                <input type="checkbox" id="view-list" name="viewMode" class="view-input"
+                    [checked]="filterboxState.viewMode === 'list'" (change)="setViewMode('list')" />
+                <label for="view-list" class="view-icon" title="List view">
+                    <mat-icon>view_list</mat-icon>
+                </label>
+
+                <input type="checkbox" id="view-gallery" name="viewMode" class="view-input"
+                    [checked]="filterboxState.viewMode === 'gallery'" (change)="setViewMode('gallery')" />
+                <label for="view-gallery" class="view-icon" title="Gallery view">
+                    <mat-icon>grid_view</mat-icon>
+                </label>
+            </div>
+        </div>
+    </form>
+</div>
+<mat-divider></mat-divider>

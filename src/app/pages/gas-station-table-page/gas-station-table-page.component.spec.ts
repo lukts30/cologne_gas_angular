@@ -3,6 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { GasStationTablePageComponent } from './gas-station-table-page.component';
 import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('GasStationTablePageComponent', () => {
   let component: GasStationTablePageComponent;
@@ -10,7 +11,7 @@ describe('GasStationTablePageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [GasStationTablePageComponent],
+      imports: [GasStationTablePageComponent, RouterTestingModule],
       providers: [        
         provideHttpClient(),
         provideHttpClientTesting(),

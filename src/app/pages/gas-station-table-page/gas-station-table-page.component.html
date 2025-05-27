@@ -1,15 +1,7 @@
-<div class="p-4">
+<app-filterbox (filterboxStateChanged)="onFilterChanged($event)" [showViewToggleRow]="false">
+</app-filterbox>
 
-    <section class="example-section">
-        <mat-checkbox [(ngModel)]="hideUnmatchedRecords" (change)="searchTextChanged()">Show only matches</mat-checkbox>
-    </section>
-
-    <mat-form-field>
-        <mat-label>Filter</mat-label>
-        <input matInput (keyup)="searchTextChanged()" (change)="searchTextChanged()" [(ngModel)]="searchText" placeholder="Enter text to search"
-            #input>
-    </mat-form-field>
-
+<div>
     <table mat-table [dataSource]="dataSource" matSort>
 
         <!-- ID Column -->
@@ -23,7 +15,7 @@
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Adresse</th>
             <td mat-cell *matCellDef="let element" 
                 appHighlight 
-                [searchedWord]="searchText"
+                [searchedWord]="filterState.searchQuery || ''"
                 [classToApply]="'font-weight-bold'"
                 content="{{element.adresse}}">
             </td>

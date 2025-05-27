@@ -1,0 +1,74 @@
+.filterbox-wrapper {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+  
+  .filterbox-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+  }
+  
+  .filterbox-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: nowrap;
+  }
+  
+  .search-field {
+    flex: 1;
+    min-width: 200px;
+  }
+  
+  .match-checkbox {
+    white-space: nowrap;
+  }
+  
+  .sort-select {
+    margin-left: auto;
+    min-width: 150px;
+  }
+  
+  .view-toggle-row {
+    justify-content: flex-end;
+  }
+  
+  .spacer {
+    flex: 1;
+  }
+  
+  .view-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .view-label {
+    font-weight: 500;
+    margin-right: 0.25rem;
+  }
+  
+  /* Hide native checkboxes */
+  .view-input {
+    display: none;
+  }
+  
+  /* Style icon labels like toggle buttons */
+  .view-icon {
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+  }
+  
+  /* Highlight the selected one */
+  .view-input:checked + .view-icon {
+    background-color: #e0f0ff;
+    color: #1976d2;
+  }
+  

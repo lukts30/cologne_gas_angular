@@ -1,0 +1,7 @@
+<mat-list-item #mat [routerLink]="['/gas-stations', station().objectid]">
+    <span matListItemTitle class="adress-title">
+        {{ station().adresse }}
+    </span>
+    <span matListItemLine>{{ station().latitude }}, {{ station().longitude }}</span>
+</mat-list-item>
+

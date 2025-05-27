@@ -5,11 +5,12 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatInputModule } from '@angular/material/input';
-import { MatCheckboxChange, MatCheckboxModule } from '@angular/material/checkbox';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { HighlightDirective } from './highlight.directive';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
+import { FilterboxComponent, FilterBoxState } from "../../components/filterbox/filterbox.component";
 
 
 @Component({
@@ -23,8 +24,9 @@ import { MatButtonModule } from '@angular/material/button';
     MatCheckboxModule,
     HighlightDirective,
     FormsModule,
-    RouterModule
-  ],
+    RouterModule,
+    FilterboxComponent
+],
   templateUrl: './gas-station-table-page.component.html',
   styleUrl: './gas-station-table-page.component.css'
 })
@@ -32,9 +34,13 @@ export class GasStationTablePageComponent implements OnInit, AfterViewInit {
 
   displayedColumns = ['objectid', 'adresse', 'latitude', 'longitude', 'action'];
   dataSource = new MatTableDataSource<GasStationDatapoint>([]);
-  hideUnmatchedRecords = true;
 
-  searchText = '';
+  filterState: FilterBoxState = {
+    searchQuery: '',
+    showOnlyMatches: false,
+    sortDirection: 'asc',
+    viewMode: 'list'
+  };
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -42,35 +48,43 @@ export class GasStationTablePageComponent implements OnInit, AfterViewInit {
   constructor(private gasStationService: GasStationInventoryService) { }
 
   ngOnInit(): void {
-    this.gasStationService.getGasStationData().subscribe(data => {
-      this.dataSource.data = data;
-    });
     this.dataSource.filterPredicate = function (record, filter) {
       // console.log(`${record.adresse.toLocaleLowerCase()}`);
       return record.adresse.toLocaleLowerCase().includes(filter.toLocaleLowerCase());
     }
+
+    this.gasStationService.getGasStationData().subscribe(data => {
+      this.dataSource.data = data;
+      this.applyFilterAndSort();
+    });
   }
 
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+
+    // hack to avoid ExpressionChangedAfterItHasBeenCheckedError in tests
+    setTimeout(() => {
+      this.applyFilterAndSort();
+    });
   }
 
-  showOptions(event: MatCheckboxChange): void {
-    console.log(event.checked);
+  onFilterChanged(state: FilterBoxState) {
+    this.filterState = state;
+    this.applyFilterAndSort();
+  }
 
-    if(!this.hideUnmatchedRecords) {
+  applyFilterAndSort() {
+    if (!this.filterState.showOnlyMatches) {
       this.dataSource.filter = "";
-      return;
+    } else {
+      this.dataSource.filter = this.filterState.searchQuery.trim().toLowerCase();
+    }
+  
+    if (this.sort) {
+      this.sort.active = 'adresse';
+      this.sort.direction = this.filterState.sortDirection;
+      this.sort.sortChange.emit({ active: this.sort.active, direction: this.sort.direction });
     }
   }
-
-  searchTextChanged() {
-    if(!this.hideUnmatchedRecords) {
-      this.dataSource.filter = "";
-      return;
-    }
-    this.dataSource.filter = this.searchText.trim().toLowerCase();
-  }
-
 }

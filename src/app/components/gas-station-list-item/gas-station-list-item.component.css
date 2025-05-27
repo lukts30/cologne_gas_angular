@@ -1,0 +1,6 @@
+span.adress-title {
+    cursor: pointer;
+    &:hover {
+        color: navy;
+    }
+}
